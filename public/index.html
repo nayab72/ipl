@@ -13,16 +13,15 @@
 </head>
 
 <body>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="./app.js"></script>
     <h1>IPL Dataset visualization</h1>
+    <div>
+        Enter Year: <input type="number" id ="year">
+        <button onClick="clicked()">submit</button>
+    </div>
     <div id="matches-played-per-year" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <div id="matches-won-per-team" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <div id="extra-runs-2016" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <div id="bowlers-economy-rate-2015" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    
-
-
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-
-    <script src="./app.js"></script>
-
 </body>

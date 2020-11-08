@@ -2,7 +2,7 @@ const fs = require("fs");
 const csv = require("csvtojson");
 const matchesPlayedPerYear = require("./ipl/matchesPlayedPerYear");
 const matchesWonPerTeam = require("./ipl/matchesWonPerTeam");
-const extraRuns2016 = require("./ipl/extraRuns2016");
+const extraRuns = require("./ipl/extraRuns");
 const bowlersEconomyRate2015 = require("./ipl/bowlersEconomyRate2015");
 
 const Deleiveries_FILE_PATH = "./csv_data/deliveries.csv";
@@ -13,7 +13,7 @@ const JSON_OUTPUT_FILE_PATH_EXTRA_RUNS_2016 = "./public/extraRuns.json";
 const JSON_OUTPUT_FILE_PATH_BOWLERS_ECONOMY_RATE_2015 = "./public/bowlersEconomyRate2015.json";
 
 function main() {
-  // let data ={}
+  let data ={}
   csv()
     .fromFile(MATCHES_FILE_PATH)
     .then(matches => {
@@ -21,13 +21,13 @@ function main() {
       saveMatchesPlayedPerYear(result);
       let result2 = matchesWonPerTeam(matches)
       saveMatchesWonPerTeam(result2)
-      // data.matches = matches
+      data.matches = matches
 
       csv()
       .fromFile(Deleiveries_FILE_PATH)
       .then(deliveries => {
-        let result3 = extraRuns2016(matches, deliveries)
-        saveExtraRuns2016(result3)
+        let result3 = extraRuns(matches, deliveries)
+        saveExtraRuns(result3)
         let result4 = bowlersEconomyRate2015(matches, deliveries)
         saveBowlersEconomyRate2015(result4)
         
@@ -59,9 +59,9 @@ function saveMatchesWonPerTeam(result) {
   });
 }
 
-function  saveExtraRuns2016(result) {
+function  saveExtraRuns(result) {
   const jsonData = {
-    extraRuns2016: result
+    extraRuns: result
   };
   const jsonString = JSON.stringify(jsonData);
   fs.writeFile(JSON_OUTPUT_FILE_PATH_EXTRA_RUNS_2016, jsonString, "utf8", err => {
